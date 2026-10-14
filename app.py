@@ -361,35 +361,72 @@ with tab_pipeline:
             hide_index=True,
         )
 
-        st.markdown("#### ⚡ 1-Click Client Outreach & Follow-up Hub")
-        st.caption("Click WhatsApp to instantly initiate conversation without saving the contact on your phone:")
+        st.markdown("---")
+        st.markdown("#### ⚡ 1-Click Direct Outreach & Action Hub")
+        st.caption("Select any client from the list below to initiate direct WhatsApp conversation or update deal status:")
 
-        # Show contact action cards for each filtered lead
-        for _, row in filtered_df.iterrows():
-            with st.expander(f"📌 {row['Lead_ID']} — {row['Client_Name']} ({row['Company']}) | {row['Pipeline_Stage']} | ₹{row['Deal_Value_INR']:,.0f}"):
-                col_a, col_b, col_c = st.columns([2, 2, 2])
-                with col_a:
-                    st.write(f"**Email:** [{row['Email']}](mailto:{row['Email']})")
-                    st.write(f"**Phone:** +{row['Phone']}")
-                    st.write(f"**Service:** {row['Service_Required']}")
-                with col_b:
-                    st.write(f"**Stage:** {row['Pipeline_Stage']}")
-                    st.write(f"**Priority:** {row['Priority']}")
-                    st.write(f"**Next Follow-up:** {row['Next_Follow_Up']}")
-                with col_c:
-                    wa_message = f"Hi {row['Client_Name']}, this is Onkar Hande. Following up regarding your inquiry for {row['Service_Required']} at {row['Company']}."
-                    wa_url = f"https://wa.me/{row['Phone']}?text={pd.Series([wa_message]).apply(lambda s: s.replace(' ', '%20')).values[0]}"
-                    
+        lead_options = {
+            f"{r['Lead_ID']} — {r['Client_Name']} ({r['Company']})": r["Lead_ID"]
+            for _, r in filtered_df.iterrows()
+        }
+
+        if lead_options:
+            selected_label = st.selectbox("Choose Prospect:", list(lead_options.keys()))
+            selected_id = lead_options[selected_label]
+            selected_row = filtered_df[filtered_df["Lead_ID"] == selected_id].iloc[0]
+
+            with st.container():
+                st.markdown(
+                    f"""
+                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 20px; margin-top: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div>
+                                <h4 style="margin: 0; color: #0F172A; font-size: 1.15rem;">{selected_row['Client_Name']} — <span style="color: #64748B;">{selected_row['Company']}</span></h4>
+                                <div style="font-size: 0.85rem; color: #64748B; margin-top: 3px;">Service: <strong>{selected_row['Service_Required']}</strong> | Source: <strong>{selected_row['Lead_Source']}</strong></div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 1.25rem; font-weight: 800; color: #10B981;">₹{selected_row['Deal_Value_INR']:,.0f}</div>
+                                <div style="font-size: 0.8rem; font-weight: 700; color: #2563EB;">{selected_row['Pipeline_Stage']} ({selected_row['Priority']} Priority)</div>
+                            </div>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+                c_act1, c_act2 = st.columns([1.5, 2.5])
+                with c_act1:
+                    wa_message = f"Hi {selected_row['Client_Name']}, this is Onkar Hande. Following up regarding your inquiry for {selected_row['Service_Required']} at {selected_row['Company']}."
+                    wa_url = f"https://wa.me/{selected_row['Phone']}?text={wa_message.replace(' ', '%20')}"
+
                     st.markdown(
                         f"""
-                        <a href="{wa_url}" target="_blank" class="wa-btn">
-                            💬 WhatsApp Client
-                        </a>
+                        <div style="margin-top: 15px;">
+                            <a href="{wa_url}" target="_blank" class="wa-btn" style="padding: 10px 20px; font-size: 0.95rem; display: inline-block;">
+                                💬 WhatsApp {selected_row['Client_Name'].split()[0]} Directly
+                            </a>
+                        </div>
                         """,
                         unsafe_allow_html=True,
                     )
-                    st.markdown("<br>", unsafe_allow_html=True)
-                    st.write(f"**Internal Notes:** {row['Notes']}")
+                    st.caption(f"Phone: +{selected_row['Phone']} • Email: [{selected_row['Email']}](mailto:{selected_row['Email']})")
+
+                with c_act2:
+                    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+                    new_stage_select = st.selectbox(
+                        "Update Pipeline Stage:",
+                        ["New Lead", "Contacted", "Proposal Sent", "Deal Won", "Lost"],
+                        index=["New Lead", "Contacted", "Proposal Sent", "Deal Won", "Lost"].index(selected_row["Pipeline_Stage"]),
+                        key=f"stage_updater_{selected_id}",
+                    )
+                    if st.button("💾 Update Deal Stage", key=f"btn_update_{selected_id}"):
+                        st.session_state.leads_data.loc[
+                            st.session_state.leads_data["Lead_ID"] == selected_id, "Pipeline_Stage"
+                        ] = new_stage_select
+                        st.success(f"Updated {selected_row['Client_Name']} to '{new_stage_select}'!")
+                        st.rerun()
+
+                st.info(f"📝 **Internal Notes & Scope:** {selected_row['Notes']} (Scheduled Follow-up: {selected_row['Next_Follow_Up']})")
 
 # ------------------------------------------
 # TAB 3: ADD NEW LEAD
