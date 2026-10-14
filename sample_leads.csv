@@ -1,0 +1,16 @@
+Lead_ID,Client_Name,Company,Phone,Email,Lead_Source,Service_Required,Deal_Value_INR,Pipeline_Stage,Priority,Next_Follow_Up,Notes
+LEAD-101,Amit Sharma,Apex Logistics Pune,919876543210,amit@apexlogistics.in,Website,Excel Automation & Cleaning,35000,Deal Won,High,2026-10-15,Closed multi-depot inventory tracking workbook.
+LEAD-102,Pooja Deshmukh,Deshmukh Organic Mart,919823456781,pooja@deshmukhorganic.com,Instagram,E-Commerce Development,60000,Proposal Sent,High,2026-10-18,Sent quotation for Shopify store setup with payment gateway.
+LEAD-103,Rohan Mehta,Mehta Financial Services,919811223344,rohan@mehtafin.com,LinkedIn,n8n Workflow Automation,45000,Contacted,Medium,2026-10-19,Demo call done; interested in lead notification to Telegram.
+LEAD-104,Priya Patel,Patel Exports Surat,919922334455,priya@patelexports.com,Google Ads,Excel Automation & Cleaning,25000,Deal Won,Medium,2026-10-14,Delivered export shipment reconciler with macros.
+LEAD-105,Vikram Joshi,Joshi Auto Spares,919733445566,vikram@joshiauto.in,Referral,Power BI Dashboard,50000,Proposal Sent,High,2026-10-20,Waiting for MD approval on sales dashboard spec.
+LEAD-106,Sneha Kulkarni,Kulkarni Diagnostics,919855667788,sneha@kulkarnilab.com,Website,n8n Workflow Automation,30000,New Lead,High,2026-10-16,Wants automated patient report delivery via WhatsApp API.
+LEAD-107,Rajesh Verma,Verma Digital Agency,919866778899,rajesh@vermadigital.in,LinkedIn,Lead Generation,40000,Deal Won,High,2026-10-12,Contract signed for 200 verified B2B leads monthly.
+LEAD-108,Neha Patil,Patil Agro Mart,919877889900,neha@patilagro.com,Referral,E-Commerce Development,55000,Lost,Low,2026-10-10,Budget constrained; opted for basic social media catalog.
+LEAD-109,Anand Rathi,Rathi Builders Nashik,919888990011,anand@rathibuilders.com,Google Ads,Lead Generation,85000,Proposal Sent,High,2026-10-21,High-ticket residential project launch campaign.
+LEAD-110,Kavita Nair,Nair Wellness Center,919899001122,kavita@nairwellness.in,Instagram,n8n Workflow Automation,28000,Contacted,Medium,2026-10-17,Needs appointment reminder bot linked to Google Calendar.
+LEAD-111,Sanjay Gupta,Gupta Textiles Surat,919900112233,sanjay@guptatextiles.com,Website,Excel Automation & Cleaning,22000,New Lead,Medium,2026-10-16,Messy vendor GST reconciliation files needed within 2 days.
+LEAD-112,Deepak Patil,Deepak Engineering Kolhapur,919911223344,deepak@deepakeng.co.in,Referral,Power BI Dashboard,48000,Deal Won,High,2026-10-13,Built machine downtime and scrap monitoring report.
+LEAD-113,Meera Iyer,Iyer Consulting Mumbai,919922334455,meera@iyerconsult.com,LinkedIn,n8n Workflow Automation,65000,Proposal Sent,High,2026-10-22,Enterprise multi-step CRM lead routing system.
+LEAD-114,Sunil Shinde,Shinde Transports,919933445566,sunil@shindetrans.in,Google Ads,Excel Automation & Cleaning,18000,Contacted,Low,2026-10-18,Driver trip sheet audit and diesel expense calculator.
+LEAD-115,Poonam Kale,Kale Fashion Studio Pune,919944556677,poonam@kalefashion.com,Instagram,E-Commerce Development,38000,New Lead,Medium,2026-10-17,Inquired about boutique catalog website with Razorpay integration.
